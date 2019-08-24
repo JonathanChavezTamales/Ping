@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //DB
-mongoose.connect(process.env.DB_URI, { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://dcrdn:dcrdn@ping-rykoo.azure.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
 mongoose.connection.once('open', () => {
   console.log('<< connected to db');
 });
