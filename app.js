@@ -3,7 +3,6 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const connection = require('./config/db/mongodb');
 
 //Global middleware
 app.use('/static', express.static('static'));
@@ -15,13 +14,11 @@ app.use(cors());
 //Routes
 const NGORoutes = require('./routes/NGO/index.js');
 const UserRoutes = require('./routes/User/index.js');
-app.use('/NGO/', NGORoutes);
-app.use('/user/', UserRoutes);
+const EventRoutes = require('./routes/Event/index.js');
 
-//DB
-connection.once('open', () => {
-  console.log('<< connected to db');
-});
+app.use('/ngo/', NGORoutes);
+app.use('/user/', UserRoutes);
+app.use('/event/', EventRoutes);
 
 //Errors
 
