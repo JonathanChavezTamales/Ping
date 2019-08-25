@@ -53,6 +53,28 @@ Router.get('/:id', (req, res) => {
     });
 });
 
+Router.get('/:id/events', (req, res) => {
+  session
+    .run(
+      `MATCH (u:User)-[r:PARTICIPATES]->(e:Event) WHERE id(u)=${req.params.id} RETURN id(e);`
+    )
+    .then(result => {
+      driver.close();
+      payload = [];
+      result.records.forEach(r => {
+        payload.push(r.get(0));
+      });
+      res.json({ payload });
+    })
+    .catch(e => {
+      console.log(e);
+      res
+        .status(500)
+        .json(e)
+        .end();
+    });
+});
+
 Router.post('/follows', (req, res) => {});
 
 module.exports = Router;

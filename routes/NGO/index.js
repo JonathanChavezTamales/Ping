@@ -48,8 +48,29 @@ Router.get('/:id', (req, res) => {
     .run(`MATCH (o:NGO) WHERE id(o)=${req.params.id} RETURN o;`)
     .then(result => {
       driver.close();
-      console.log(result);
       res.json(result.records[0].get(0));
+    })
+    .catch(e => {
+      console.log(e);
+      res
+        .status(500)
+        .json(e)
+        .end();
+    });
+});
+
+Router.get('/:id/events', (req, res) => {
+  session
+    .run(
+      `MATCH (o:NGO)-[r:ORGANIZES]->(e:Event) WHERE id(o)=${req.params.id} RETURN id(e);`
+    )
+    .then(result => {
+      driver.close();
+      payload = [];
+      result.records.forEach(r => {
+        payload.push(r.get(0));
+      });
+      res.json({ payload });
     })
     .catch(e => {
       console.log(e);
