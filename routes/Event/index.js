@@ -10,9 +10,9 @@ Router.post('/', (req, res) => {
       {
         name: req.body.name,
         capacity: req.body.capacity,
-        pregunta_1: req.body.pregunta_1,
-        pregunta_2: req.body.pregunta_2,
-        pregunta_3: req.body.pregunta_3,
+        p1: req.body.pregunta_1,
+        p2: req.body.pregunta_2,
+        p3: req.body.pregunta_3,
         imageUrl: req.body.imageUrl,
         organizer_id: ngo_id
       }
