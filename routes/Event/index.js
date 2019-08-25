@@ -6,15 +6,15 @@ const { session, driver } = require('../../config/db/neo4j');
 Router.post('/', (req, res) => {
   session
     .run(
-      `MATCH (o:NGO) WHERE id(o)=${req.body.ngo_id} CREATE (o)-[r:ORGANIZES]->(e:Event {name:$name, capacity:$capacity, description:$description, image:$imageUrl, organizer_id:$organizer_id}) RETURN e;`,
+      `MATCH (o:NGO) WHERE id(o)=${req.body.ngo_id} CREATE (o)-[r:ORGANIZES]->(e:Event {name:$name, capacity:$capacity, p1:$p1, p2:$p2, p3:$p3, image:$imageUrl, organizer_id:$organizer_id}) RETURN e;`,
       {
         name: req.body.name,
         capacity: req.body.capacity,
-        p1: req.body.pregunta_1,
-        p2: req.body.pregunta_2,
-        p3: req.body.pregunta_3,
+        p1: req.body.p1,
+        p2: req.body.p2,
+        p3: req.body.p3,
         imageUrl: req.body.imageUrl,
-        organizer_id: ngo_id
+        organizer_id: req.body.ngo_id
       }
     )
     .then(result => {
@@ -58,6 +58,7 @@ Router.get('/:id', (req, res) => {
     .then(result => {
       driver.close();
       payload = result.records[0].get(0);
+      res.json({ payload });
     })
     .catch(e => {
       console.log(e);
