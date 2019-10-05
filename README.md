@@ -1,7 +1,7 @@
-# Ping/The Helping Network
+# The Helping Network
 *HackMTY 2019 Hackathon*
 
-**Ping/The Helping Network is a social network for people that want to work as a volunteer in an organization or in case of an emergency.**
+**The Helping Network is a social network for people that want to work as a volunteer in an organization or in case of an emergency.**
 Developed with React, Redux, Node.js and Neo4j.
 
 
